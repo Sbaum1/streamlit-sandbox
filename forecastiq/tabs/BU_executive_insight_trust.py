@@ -1,0 +1,252 @@
+# ==================================================
+# FILE: forecastiq/tabs/executive_insight_trust.py
+# VERSION: 2.0.0
+# ROLE: EXECUTIVE INSIGHT & TRUST
+# UPDATED: Phase 4 — MASE-based confidence score,
+#          cert tier display, sentinel engine metadata.
+# ==================================================
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+from engine.auto_intelligence import generate_recommendations
+
+
+# ── MASE → confidence score (0–100) ──────────────────────────────────────────
+def _mase_confidence_score(cert_metadata: list) -> int:
+    """
+    Derive confidence score from Primary Ensemble MASE.
+    Elite  (MASE<0.70) → 85–100
+    Strong (MASE<0.85) → 65–84
+    Pass   (MASE<1.00) → 45–64
+    Fail   (MASE≥1.00) → 0–44
+    """
+    if not cert_metadata:
+        return 0
+
+    pe = next((m for m in cert_metadata if m["model"] == "Primary Ensemble"), None)
+    if pe is None or pe.get("MASE") is None:
+        return 40
+
+    mase = pe["MASE"]
+    if mase < 0.50:
+        return 100
+    if mase < 0.70:
+        return int(85 + (0.70 - mase) / 0.20 * 15)
+    if mase < 0.85:
+        return int(65 + (0.85 - mase) / 0.15 * 20)
+    if mase < 1.00:
+        return int(45 + (1.00 - mase) / 0.15 * 20)
+    return max(0, int(40 - (mase - 1.00) * 40))
+
+
+def render_executive_insight_trust():
+    st.header("Executive Insight & Trust")
+
+    if st.session_state.latest_metrics is None:
+        st.info("Run a baseline forecast to unlock trust and insight analysis.")
+        return
+
+    cert_metadata = st.session_state.sentinel_cert_metadata or []
+
+    # =========================================================================
+    # ENGINE METADATA BANNER
+    # =========================================================================
+    engine_ver  = st.session_state.sentinel_engine_version or "2.0.0"
+    active_tier = st.session_state.sentinel_active_tier or "Enterprise"
+    run_meta    = st.session_state.sentinel_run_metadata or {}
+
+    attempted = run_meta.get("models_attempted", "—")
+    succeeded = run_meta.get("models_succeeded", "—")
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Engine Version",  f"v{engine_ver}")
+    col2.metric("Active Tier",     active_tier)
+    col3.metric("Models Attempted", attempted)
+    col4.metric("Models Succeeded", succeeded)
+
+    st.divider()
+
+    # =========================================================================
+    # CONFIDENCE SCORE (MASE-BASED)
+    # =========================================================================
+    st.subheader("Forecast Confidence")
+
+    confidence_score = _mase_confidence_score(cert_metadata)
+
+    # Find Primary Ensemble MASE for display
+    pe_meta = next((m for m in cert_metadata if m["model"] == "Primary Ensemble"), {})
+    pe_mase = pe_meta.get("MASE")
+    pe_tier = pe_meta.get("cert_tier", "—")
+
+    col_a, col_b, col_c = st.columns(3)
+    col_a.metric(
+        "Confidence Score (0–100)",
+        confidence_score,
+        help="Derived from Primary Ensemble MASE. Elite MASE < 0.70 scores 85–100.",
+    )
+    col_b.metric(
+        "Primary Ensemble MASE",
+        f"{pe_mase:.4f}" if pe_mase is not None else "—",
+        help="Mean Absolute Scaled Error vs seasonal naïve baseline.",
+    )
+    col_c.metric(
+        "M-Competition Tier",
+        pe_tier,
+        help="Elite < 0.70 | Strong < 0.85 | Pass < 1.00 | Fail ≥ 1.00",
+    )
+
+    st.markdown(
+        "**Why this matters:** Confidence is derived from MASE vs the M-Competition "
+        "Elite Tier benchmark — not just internal model agreement. "
+        "Elite tier means the engine outperforms professional forecasting software baselines."
+    )
+
+    st.divider()
+
+    # =========================================================================
+    # CERTIFICATION SUMMARY
+    # =========================================================================
+    st.subheader("Model Certification Summary")
+
+    if cert_metadata:
+        cert_df = pd.DataFrame(cert_metadata)
+
+        # Count tiers
+        tier_counts = cert_df["cert_tier"].value_counts().to_dict()
+        elite  = tier_counts.get("Elite",  0)
+        strong = tier_counts.get("Strong", 0)
+        pass_  = tier_counts.get("Pass",   0)
+        fail   = tier_counts.get("Fail",   0)
+
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("🟢 Elite",  elite)
+        c2.metric("🟡 Strong", strong)
+        c3.metric("🟠 Pass",   pass_)
+        c4.metric("🔴 Fail",   fail)
+
+        # Stacked Ensemble callout
+        se_meta = next((m for m in cert_metadata if m["model"] == "Stacked Ensemble"), None)
+        if se_meta and se_meta.get("MASE") is not None:
+            st.info(
+                f"Stacked Ensemble (Ridge meta-learner): "
+                f"MASE {se_meta['MASE']:.4f} · {se_meta.get('cert_tier', '—')} tier · "
+                f"Available as secondary forecast pathway."
+            )
+    else:
+        st.info("No certification metadata available.")
+
+    st.divider()
+
+    # =========================================================================
+    # BEHAVIORAL REGIME
+    # =========================================================================
+    st.subheader("Behavioral Regime")
+
+    if confidence_score >= 80:
+        regime = "Stable / High Confidence"
+        regime_color = "success"
+    elif confidence_score >= 55:
+        regime = "Moderate / Trend-Aligned"
+        regime_color = "info"
+    else:
+        regime = "Volatile / Uncertain"
+        regime_color = "warning"
+
+    getattr(st, regime_color)(f"Current Regime: **{regime}**")
+
+    # =========================================================================
+    # RISK FLAGS
+    # =========================================================================
+    st.subheader("Risk Flags")
+
+    risk_flags = []
+
+    if confidence_score < 50:
+        risk_flags.append("Confidence score below 50 — model agreement is low.")
+
+    if pe_mase is not None and pe_mase >= 1.0:
+        risk_flags.append("Primary Ensemble MASE ≥ 1.00 — does not beat naïve baseline.")
+
+    if fail > 0:
+        risk_flags.append(f"{fail} model(s) failed the MASE certification gate.")
+
+    if st.session_state.freq_inference_details:
+        if st.session_state.freq_inference_details.get("confidence", 1) < 0.7:
+            risk_flags.append("Low confidence in inferred data frequency.")
+
+    # Prophet flag
+    prophet_meta = next((m for m in cert_metadata if m["model"] == "Prophet"), None)
+    if prophet_meta and prophet_meta.get("MASE") is not None:
+        if prophet_meta["MASE"] >= 1.0:
+            risk_flags.append(
+                "Prophet flagged (MASE ≥ 1.00 on regime-change data). "
+                "Regime-detection filter active."
+            )
+
+    if not risk_flags:
+        st.success("No major structural risks detected.")
+    else:
+        for rf in risk_flags:
+            st.warning(rf)
+
+    st.divider()
+
+    # =========================================================================
+    # AUTO-INTELLIGENCE GUIDANCE
+    # =========================================================================
+    st.subheader("Executive Guidance")
+
+    enable_ai = st.toggle("Enable Auto-Intelligence Recommendation", value=False)
+
+    if enable_ai:
+        context = {
+            "volatility":            1 - (confidence_score / 100),
+            "trend_strength":        0.5,
+            "seasonality_strength":  0.5,
+        }
+        recs = generate_recommendations(context)
+
+        st.markdown("### Recommendations")
+        if recs.get("horizon"):
+            st.markdown(f"- **Horizon Guidance:** {recs['horizon']}")
+        if recs.get("model_focus"):
+            st.markdown(f"- **Model Emphasis:** {recs['model_focus']}")
+        if recs.get("scenario_tests"):
+            st.markdown("- **Suggested Scenario Tests:**")
+            for s in recs["scenario_tests"]:
+                st.markdown(f"  - {s}")
+
+        st.session_state.audit_log.append({
+            "event":            "auto_intelligence_view",
+            "timestamp":        st.session_state.last_run_timestamp,
+            "summary":          "Executive guidance viewed",
+            "confidence_score": confidence_score,
+            "regime":           regime,
+            "pe_mase":          pe_mase,
+        })
+
+    # =========================================================================
+    # SCENARIO IMPACT SUMMARY
+    # =========================================================================
+    if st.session_state.scenario_state.get("enabled"):
+        st.subheader("Scenario Impact Summary")
+        st.markdown(
+            "Scenario analysis is currently applied. "
+            "Review baseline vs scenario deltas to understand decision sensitivity."
+        )
+
+    # =========================================================================
+    # ASSUMPTIONS & LIMITATIONS
+    # =========================================================================
+    with st.expander("Assumptions & Limitations"):
+        st.markdown(
+            "- Sentinel Engine v2.0.0 — M-Competition Elite Tier certified.\n"
+            "- MASE measured against seasonal naïve baseline (M-Competition standard).\n"
+            "- Confidence score derived from Primary Ensemble MASE, not model agreement.\n"
+            "- Prophet uses regime-detection pre-filter; may be suppressed on shock data.\n"
+            "- Forecasts assume historical patterns persist absent structural breaks.\n"
+            "- Scenario overlays are illustrative, not predictive.\n"
+            "- Stacked Ensemble (Ridge meta-learner) is a secondary pathway — "
+            "Primary Ensemble is the certified baseline."
+        )

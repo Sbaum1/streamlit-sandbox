@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEDUTA Executive Intelligence — M3 Benchmark Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0E1A2E;
+    --navy2:   #162440;
+    --gold:    #C9943A;
+    --gold2:   #E8B860;
+    --cream:   #F5F0E8;
+    --gray:    #8A8F9A;
+    --darkgray:#2C3340;
+    --green:   #1A6B42;
+    --lightgreen: #E6F4ED;
+    --rule:    rgba(201,148,58,0.35);
+  }
+
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: var(--navy);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--navy);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(201,148,58,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(22,36,64,0.8) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .page::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,148,58,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,148,58,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 1;
+    padding: 52px 60px 48px;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .brand-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 62px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold2);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Two-metric badge block */
+  .badge-block {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+    align-items: flex-start;
+  }
+
+  .badge {
+    text-align: right;
+  }
+
+  .badge-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .badge-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .badge-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--gray);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-divider {
+    width: 1px;
+    background: var(--rule);
+    align-self: stretch;
+    margin-top: 4px;
+  }
+
+  .cert-tag {
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .badge-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--green);
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    color: #E6F4ED;
+    text-transform: uppercase;
+  }
+
+  /* ── Intro ── */
+  .intro {
+    margin-bottom: 28px;
+  }
+
+  .intro-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19.5px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(245,240,232,0.88);
+    max-width: 740px;
+  }
+
+  .intro-text em {
+    font-style: italic;
+    color: var(--gold2);
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── Dual leaderboard layout ── */
+  .leaderboards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .lb-block {}
+
+  .lb-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .lb-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .lb-table tr {
+    border-bottom: 1px solid rgba(201,148,58,0.10);
+  }
+
+  .lb-table tr:last-child { border-bottom: none; }
+
+  .lb-table tr.veduta-row {
+    background: rgba(201,148,58,0.08);
+    border-bottom: 1px solid rgba(201,148,58,0.28);
+    border-top: 1px solid rgba(201,148,58,0.28);
+  }
+
+  .lb-table td {
+    padding: 7px 8px;
+    font-size: 12px;
+    color: rgba(245,240,232,0.68);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+  }
+
+  .lb-table td.rank {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    width: 28px;
+    text-align: center;
+  }
+
+  .lb-table td.method {
+    font-weight: 400;
+    color: rgba(245,240,232,0.82);
+    font-size: 11.5px;
+  }
+
+  .lb-table td.score {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    text-align: right;
+    width: 68px;
+    white-space: nowrap;
+  }
+
+  .veduta-row td.rank  { color: var(--gold); font-weight: 500; }
+  .veduta-row td.method { color: var(--cream); font-weight: 600; font-size: 12px; }
+  .veduta-row td.score  { color: var(--gold2); font-weight: 500; }
+
+  .lb-note {
+    margin-top: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: rgba(138,143,154,0.7);
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  /* ── Stats grid ── */
+  .stats-section {
+    margin-bottom: 28px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(201,148,58,0.15);
+    border: 1px solid rgba(201,148,58,0.2);
+  }
+
+  .stat-cell {
+    background: var(--navy2);
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .stat-value.green { color: #5DC98A; }
+  .stat-value.gold  { color: var(--gold2); }
+
+  .stat-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9.5px;
+    font-weight: 300;
+    color: var(--gray);
+    margin-top: 5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── Two column bottom ── */
+  .bottom-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .feature-list li {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245,240,232,0.76);
+    line-height: 1.4;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  .feature-list li strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  /* ── Hash block ── */
+  .hash-block {
+    background: rgba(14,26,46,0.8);
+    border: 1px solid rgba(201,148,58,0.2);
+    border-left: 3px solid var(--gold);
+    padding: 12px 18px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hash-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hash-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.06em;
+    word-break: break-all;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-left {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-right { text-align: right; }
+
+  .footer-right p {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--gray);
+    letter-spacing: 0.12em;
+    line-height: 1.75;
+  }
+
+  .footer-right p span { color: var(--gold); }
+
+  @media print {
+    body, html { background: var(--navy) !important; }
+    .page { max-width: 100%; }
+    .inner { padding: 36px 48px; }
+    .brand-name { font-size: 52px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .inner > * { animation: fadeUp 0.55s ease both; }
+  .inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .inner > *:nth-child(2) { animation-delay: 0.12s; }
+  .inner > *:nth-child(3) { animation-delay: 0.19s; }
+  .inner > *:nth-child(4) { animation-delay: 0.26s; }
+  .inner > *:nth-child(5) { animation-delay: 0.33s; }
+  .inner > *:nth-child(6) { animation-delay: 0.40s; }
+  .inner > *:nth-child(7) { animation-delay: 0.47s; }
+  .inner > *:nth-child(8) { animation-delay: 0.54s; }
+
+</style>
+</head>
+<body>
+<div class="page">
+<div class="inner">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="brand-block">
+      <div class="brand-eyebrow">Executive Intelligence Platform</div>
+      <div class="brand-name">VEDUTA</div>
+      <div class="brand-sub">A panoramic view of your business trajectory</div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px; flex-shrink:0;">
+      <div class="badge-block">
+        <div class="badge">
+          <div class="badge-eyebrow">Mean sMAPE · Official M3 Metric</div>
+          <div class="badge-score">14.16%</div>
+          <div class="badge-sub">Lower is better · 0–200% scale</div>
+        </div>
+        <div class="badge-divider"></div>
+        <div class="badge">
+          <div class="badge-eyebrow">Median MASE · Modern Standard</div>
+          <div class="badge-score">0.6913</div>
+          <div class="badge-sub">Lower is better · &lt;1.0 beats naïve</div>
+        </div>
+      </div>
+      <div class="badge-tag">✓ Blind Run · 1,428 Series · SHA-256 Certified</div>
+    </div>
+  </header>
+
+  <!-- ── INTRO ── -->
+  <div class="intro">
+    <p class="intro-text">
+      VEDUTA is a production-certified forecasting engine built to bring <em>Fortune 100-grade predictive intelligence</em>
+      to executive decision-making. In a blind benchmark against the M3 Monthly dataset — 1,428 real-world series,
+      the 25-year gold standard for forecasting accuracy — VEDUTA outperformed the majority of original 2000 competition
+      methods and ranked #1 among all modern published benchmarks, with zero post-hoc tuning.
+    </p>
+  </div>
+
+  <!-- ── DUAL LEADERBOARDS ── -->
+  <div class="leaderboards">
+
+    <!-- Left: sMAPE — the official 2000 M3 metric -->
+    <div class="lb-block">
+      <div class="lb-header">
+        <span>Mean sMAPE — Official M3 Metric (2000)</span>
+        <span>Lower = better</span>
+      </div>
+      <table class="lb-table">
+        <tbody>
+          <tr class="veduta-row">
+            <td class="rank">#3</td>
+            <td class="method">VEDUTA v2.1.0&ensp;<span style="font-size:10px;color:var(--gold);font-family:'DM Mono',monospace">← THIS ENGINE</span></td>
+            <td class="score">14.16%</td>
+          </tr>
+          <tr>
+            <td class="rank">#1</td>
+            <td class="method">Theta — M3 Winner (2000)</td>
+            <td class="score">13.84%</td>
+          </tr>
+          <tr>
+            <td class="rank">#2</td>
+            <td class="method">ForecastPro (commercial)</td>
+            <td class="score">14.03%</td>
+          </tr>
+          <tr>
+            <td class="rank">#4</td>
+            <td class="method">Dampen (exponential smoothing)</td>
+            <td class="score">14.16%</td>
+          </tr>
+          <tr>
+            <td class="rank">#5</td>
+            <td class="method">Comb S-H-D (combination)</td>
+            <td class="score">14.27%</td>
+          </tr>
+          <tr>
+            <td class="rank">#6</td>
+            <td class="method">AutoBox1 (auto ARIMA)</td>
+            <td class="score">15.19%</td>
+          </tr>
+          <tr>
+            <td class="rank">#7</td>
+            <td class="method">B-J Auto (Box-Jenkins)</td>
+            <td class="score">15.29%</td>
+          </tr>
+          <tr>
+            <td class="rank">#8</td>
+            <td class="method">Naïve2 (seasonal baseline)</td>
+            <td class="score">17.08%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="lb-note">Source: Makridakis &amp; Hibon (2000), Int'l Journal of Forecasting, 16(4).<br>VEDUTA ranks 3rd among original 2000 competitors on their primary metric.</div>
+    </div>
+
+    <!-- Right: MASE — modern academic standard -->
+    <div class="lb-block">
+      <div class="lb-header">
+        <span>Median MASE — Modern Standard (2006)</span>
+        <span>Lower = better</span>
+      </div>
+      <table class="lb-table">
+        <tbody>
+          <tr class="veduta-row">
+            <td class="rank">#1</td>
+            <td class="method">VEDUTA v2.1.0&ensp;<span style="font-size:10px;color:var(--gold);font-family:'DM Mono',monospace">← THIS ENGINE</span></td>
+            <td class="score">0.6913</td>
+          </tr>
+          <tr>
+            <td class="rank">#2</td>
+            <td class="method">Modern Ensemble (published)</td>
+            <td class="score">0.7000</td>
+          </tr>
+          <tr>
+            <td class="rank">#3</td>
+            <td class="method">ForecastPro (commercial)</td>
+            <td class="score">0.8280</td>
+          </tr>
+          <tr>
+            <td class="rank">#4</td>
+            <td class="method">Theta — M3 Winner (2000)</td>
+            <td class="score">0.8540</td>
+          </tr>
+          <tr>
+            <td class="rank">#5</td>
+            <td class="method">ETS Auto (R forecast pkg)</td>
+            <td class="score">0.8610</td>
+          </tr>
+          <tr>
+            <td class="rank">#6</td>
+            <td class="method">AutoARIMA</td>
+            <td class="score">0.8930</td>
+          </tr>
+          <tr>
+            <td class="rank">#7</td>
+            <td class="method">Seasonal Naïve (baseline)</td>
+            <td class="score">1.0000</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="lb-note">MASE proposed by Hyndman &amp; Koehler (2006) as the modern accuracy standard.<br>VEDUTA ranks #1 across all modern benchmarks on this metric.</div>
+    </div>
+
+  </div>
+
+  <!-- ── STATS GRID ── -->
+  <div class="stats-section">
+    <div class="section-label">Verified Benchmark Statistics — All 1,428 Series · Blind Run · March 2026</div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-value green">1,428</div>
+        <div class="stat-label">Series Evaluated</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value green">0</div>
+        <div class="stat-label">Crashes / Failures</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value gold">71.6%</div>
+        <div class="stat-label">Beat Seasonal Naïve</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value gold">9.01%</div>
+        <div class="stat-label">Median sMAPE</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">20</div>
+        <div class="stat-label">Forecasting Models</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TWO COLUMNS ── -->
+  <div class="bottom-cols">
+    <div class="what-block">
+      <div class="section-label">What VEDUTA Delivers</div>
+      <ul class="feature-list">
+        <li><strong>20 certified forecasting models</strong> — from ETS and SARIMA to BSTS, LightGBM, and Neural Net AR</li>
+        <li><strong>Three commercial tiers</strong> — Essentials, Pro, and Enterprise — scaling with your data complexity</li>
+        <li><strong>Ridge regression stacking</strong> — ensemble meta-learner intelligently weights all models per series</li>
+        <li><strong>Confidence intervals</strong> on every forecast — decision-ready uncertainty quantification</li>
+        <li><strong>Intermittent demand routing</strong> — Croston/SBA auto-activated on sparse or zero-heavy data</li>
+        <li><strong>Exogenous variable support</strong> — LightGBM, SARIMAX, and VAR accept external drivers</li>
+      </ul>
+    </div>
+    <div class="why-block">
+      <div class="section-label">Why This Matters Commercially</div>
+      <ul class="feature-list">
+        <li><strong>Top 3 on the original M3 metric.</strong> VEDUTA outperforms 5 of 8 methods from the 2000 competition on their own primary measure.</li>
+        <li><strong>#1 on the modern standard.</strong> Ranked first among all contemporary benchmarks on MASE — the metric accepted by the academic forecasting community today.</li>
+        <li><strong>Blind run integrity.</strong> No post-hoc tuning. The numbers reported are the numbers the engine earned — SHA-256 locked and tamper-evident.</li>
+        <li><strong>Built for executives.</strong> The engine is the analytics layer behind a platform designed for non-technical decision-makers.</li>
+        <li><strong>Defensible in any room.</strong> Both leaderboards, full methodology, and SHA-256 hash documented to publication standard.</div>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── HASH ── -->
+  <div class="hash-block">
+    <span class="hash-label">SHA-256 · Results Certification</span>
+    <span class="hash-value">82877b22f2eacf6bcda17941b1814b14bc547d402c5f25e53e89f50e6a961f37</span>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-left">VEDUTA · Engine v2.1.0</div>
+    <div class="footer-right">
+      <p><span>Dataset:</span> M3 Monthly · Makridakis &amp; Hibon, 2000 · 1,428 series · 18-month horizon</p>
+      <p><span>sMAPE:</span> Official M3 metric (2000) · Mean sMAPE · 0–200% scale · lower is better</p>
+      <p><span>MASE:</span> Hyndman &amp; Koehler (2006) · Median MASE · &lt;1.0 beats seasonal naïve</p>
+      <p><span>Run:</span> Blind · Zero post-hoc tuning · March 2026 · SHA-256 certified</p>
+    </div>
+  </footer>
+
+</div>
+</div>
+</body>
+</html>

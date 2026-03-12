@@ -1,0 +1,121 @@
+{
+  "engine_version": "2.0.0",
+  "generated_at": "2026-03-11T16:28:57.579073+00:00",
+  "cert_id": "e65cd518-12fd-4699-a09b-daa5d7704c15",
+  "models": {
+    "BSTS": {
+      "sha256": "0232888f773dc110d42cae1ddaa73382d169aee38ce3c1b8441dae5723575182",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.573092+00:00"
+    },
+    "ETS": {
+      "sha256": "9e81461864a82d6187c9dd118f42e74f47e623718010ddb14a5deb4a2f04ac64",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.573092+00:00"
+    },
+    "Prophet": {
+      "sha256": "7d0a97191412c004685598d757fb7eb4a66e768b4a1217001e66f3f570088bf4",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "SARIMA": {
+      "sha256": "d7e340dda49c35e82f1a712381a9d1f372c418068e4baae4858572f81c50d25b",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "STL+ETS": {
+      "sha256": "7e748b0523557b614a0732700ae706d12b07905e5cc8de695f41d63af9dafb3f",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "TBATS": {
+      "sha256": "3c08c2930008840bed50a654a787ca77d14dbb73bf03793d795bac1eaaaf6a1c",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "Theta": {
+      "sha256": "1d17bde313c1e343e515e7675a3009d4f03349ff595bfa843dbea2d2efe543cb",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "ARIMA": {
+      "sha256": "f343ce5e0665027aae8fb9dd4bd590a2566c0db073bd392fe7b9dbe8a5ffec2c",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.575060+00:00"
+    },
+    "SARIMAX": {
+      "sha256": "d7e340dda49c35e82f1a712381a9d1f372c418068e4baae4858572f81c50d25b",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "Naive": {
+      "sha256": "26a3535c8cd50818938719b1aafaaf407ea40c8e77fd37c262606ca161e3396e",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "X-13": {
+      "sha256": "c10a5df21869acedea0b1ee78d2d3daf69cd4466e50182aa14391ea33ed7fecf",
+      "rows": 72,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "HW_Damped": {
+      "sha256": "5334773054dd0c2694b00923f8699b22b40fd1c0c34986191ccb3c04e162840f",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "Croston_SBA": {
+      "sha256": "e6563961103777b59fa115bbe3c654d4488ad4a90689504a7dc3e3a22512b4a1",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "DHR": {
+      "sha256": "a1421b30fb9c5151940a7bb1ce237cb75ced9671d39f2cb25052c0f888d5eaa6",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.577067+00:00"
+    },
+    "LightGBM": {
+      "sha256": "001d131da3cd1cdab7d034f9521451f48ee2f209109b82a060562198cad8a746",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.579073+00:00"
+    },
+    "NNETAR": {
+      "sha256": "71bb6066959234d62462c0b8fd2d91e2b8f6632e55b52ca2eefac4d3a4fef3df",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.579073+00:00"
+    },
+    "GARCH": {
+      "sha256": "825f83a90339558a09163e964c4aa256b6720ced3b756ad6520378bcd87c9ebb",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.579073+00:00"
+    },
+    "Primary Ensemble": {
+      "sha256": "2fe0793d7f231c9e98c59ae587dbbf0d733528ce909ff67050ade304fdf703c3",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.579073+00:00"
+    },
+    "Stacked Ensemble": {
+      "sha256": "7e195beccc5d8d5433f5d71609f6222478ac044541b4b9fd5fe3942782750b1e",
+      "rows": 12,
+      "engine_version": "2.0.0",
+      "generated_at": "2026-03-11T16:28:57.579073+00:00"
+    }
+  }
+}

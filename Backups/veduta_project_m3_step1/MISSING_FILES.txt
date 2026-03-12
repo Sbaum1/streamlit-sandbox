@@ -1,0 +1,23 @@
+MISSING FILES — UPLOAD FROM WINDOWS REPO
+=========================================
+These 6 files exist in your Windows repo but were not
+available in this session. Upload them to complete the
+veduta/ app directory.
+
+Source location: C:\Dev\Repos\streamlit_sandbox_sandbox_vNext_Claude\forecastiq\
+
+  forecastiq/engine/auto_intelligence.py  → veduta/engine/auto_intelligence.py
+  forecastiq/engine/scenarios.py          → veduta/engine/scenarios.py
+  forecastiq/utils/exports.py             → veduta/utils/exports.py
+  forecastiq/utils/hashing.py             → veduta/utils/hashing.py
+  forecastiq/utils/validation.py          → veduta/utils/validation.py
+  forecastiq/utils/visuals.py             → veduta/utils/visuals.py
+
+Also check for:
+  forecastiq/features/        (full directory)
+  forecastiq/intelligence/    (full directory)
+  forecastiq/assets/          (full directory)
+  forecastiq/voice/           (full directory)
+
+These are referenced in the Windows dir listing but not
+yet in our working copy.

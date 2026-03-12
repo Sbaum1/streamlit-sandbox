@@ -1,0 +1,56 @@
+{
+  "dataset": "seasonal_dataset",
+  "models": [
+    {
+      "model_name": "ARIMA",
+      "status": "PASS",
+      "variance_metric_future": 0.0
+    },
+    {
+      "model_name": "SARIMA",
+      "status": "PASS",
+      "variance_metric_future": 0.0011319077
+    },
+    {
+      "model_name": "SARIMAX",
+      "status": "PASS",
+      "variance_metric_future": 0.0011319077
+    },
+    {
+      "model_name": "Theta",
+      "status": "PASS",
+      "variance_metric_future": 1.76e-08
+    },
+    {
+      "amplification_ratio_seasonal": 1.0,
+      "amplification_ratio_trend": 0.0,
+      "model_name": "STL+ETS",
+      "status": "PASS",
+      "var_future_seasonal": 0.0011310547,
+      "var_future_total": 0.0011310547,
+      "var_future_trend": 0.0,
+      "variance_metric_future": 0.0011310547
+    },
+    {
+      "model_name": "TBATS",
+      "status": "PASS",
+      "variance_metric_future": 0.0011310547
+    },
+    {
+      "model_name": "Prophet",
+      "status": "PASS",
+      "variance_metric_future": 0.0010984003
+    },
+    {
+      "model_name": "BSTS",
+      "status": "PASS",
+      "variance_metric_future": 0.0011310547
+    },
+    {
+      "model_name": "Primary Ensemble",
+      "status": "PASS",
+      "variance_metric_future": 0.0011203758
+    }
+  ],
+  "test": "stability"
+}

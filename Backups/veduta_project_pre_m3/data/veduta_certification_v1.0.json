@@ -1,0 +1,267 @@
+{
+  "document": "VEDUTA Foresight Engine — Accuracy Certification Record",
+  "version": "1.0",
+  "date": "2026-03-07",
+  "engine": "Foresight Engine v1.0 (Sentinel Engine v2.0.0 core)",
+  "methodology": {
+    "accuracy_metric": "MASE — Mean Absolute Scaled Error (Hyndman & Koehler, 2006)",
+    "metric_reference": "Hyndman, R.J. and Koehler, A.B. (2006). Another look at measures of forecast accuracy. International Journal of Forecasting, 22(4), 679-688.",
+    "baseline_model": "Seasonal naïve (lag-12). Industry standard benchmark for monthly time series.",
+    "interpretation": "MASE < 1.0 = model beats the seasonal naïve baseline. MASE < 0.70 = model beats baseline by 30% or more.",
+    "evaluation_method": "Walk-forward split. Train: 60 observations (2018-01 to 2022-12). Test: 12 observations (2023-01 to 2023-12).",
+    "dataset": "Synthetic monthly time series. 72 observations (2018-01 to 2023-12). Upward trend with seasonal pattern. Seed=42 for reproducibility.",
+    "dataset_file": "data/input.csv",
+    "horizon": 12,
+    "confidence_level": 0.9,
+    "thresholds": {
+      "description": "Internal project thresholds — not externally standardised. Defined here for auditability.",
+      "gate": "MASE < 1.00 — model must beat seasonal naïve to pass certification",
+      "strong": "MASE < 0.85",
+      "high": "MASE < 0.70 — beats seasonal naïve by 30% or more"
+    },
+    "special_cases": {
+      "Prophet": "Excluded from gate — known weakness on regime-change data. Flagged per project governance Option A.",
+      "VAR": "Requires multi-variate input. Gated separately at Stage 4 (diversity test).",
+      "Croston_SBA": "Requires intermittent demand series. Gated separately at Stage 4."
+    }
+  },
+  "results": {
+    "gate_summary": "16/16 certifiable models beat seasonal naive baseline (MASE < 1.00)",
+    "median_mase": 0.5495,
+    "mase_scale": 99548.1875,
+    "naive_rmse": 108439.2226,
+    "best_mase": 0.2199,
+    "best_model": "Primary Ensemble",
+    "models": {
+      "ARIMA": {
+        "mase": 0.6977,
+        "smape": 4.5146,
+        "gate": "PASS",
+        "beats_naive_by_pct": 30.2
+      },
+      "BSTS": {
+        "mase": 0.8423,
+        "smape": 5.4188,
+        "gate": "PASS",
+        "beats_naive_by_pct": 15.8
+      },
+      "DHR": {
+        "mase": 0.5239,
+        "smape": 3.413,
+        "gate": "PASS",
+        "beats_naive_by_pct": 47.6
+      },
+      "ETS": {
+        "mase": 0.6606,
+        "smape": 4.273,
+        "gate": "PASS",
+        "beats_naive_by_pct": 33.9
+      },
+      "GARCH": {
+        "mase": 0.9111,
+        "smape": 5.9527,
+        "gate": "PASS",
+        "beats_naive_by_pct": 8.9
+      },
+      "HW_Damped": {
+        "mase": 0.2527,
+        "smape": 1.6117,
+        "gate": "PASS",
+        "beats_naive_by_pct": 74.7
+      },
+      "LightGBM": {
+        "mase": 0.6676,
+        "smape": 4.3148,
+        "gate": "PASS",
+        "beats_naive_by_pct": 33.2
+      },
+      "NNETAR": {
+        "mase": 0.4702,
+        "smape": 3.0137,
+        "gate": "PASS",
+        "beats_naive_by_pct": 53.0
+      },
+      "Naive": {
+        "mase": 0.7104,
+        "smape": 4.5996,
+        "gate": "PASS",
+        "beats_naive_by_pct": 29.0
+      },
+      "Primary Ensemble": {
+        "mase": 0.2199,
+        "smape": 1.3989,
+        "gate": "PASS",
+        "beats_naive_by_pct": 78.0
+      },
+      "Prophet": {
+        "mase": 0.41,
+        "smape": 2.5872,
+        "gate": "FLAGGED",
+        "beats_naive_by_pct": 59.0
+      },
+      "SARIMA": {
+        "mase": 0.2871,
+        "smape": 1.8317,
+        "gate": "PASS",
+        "beats_naive_by_pct": 71.3
+      },
+      "SARIMAX": {
+        "mase": 0.2871,
+        "smape": 1.8317,
+        "gate": "PASS",
+        "beats_naive_by_pct": 71.3
+      },
+      "STL+ETS": {
+        "mase": 0.2721,
+        "smape": 1.7436,
+        "gate": "PASS",
+        "beats_naive_by_pct": 72.8
+      },
+      "Stacked Ensemble": {
+        "mase": 0.5752,
+        "smape": 3.7043,
+        "gate": "PASS",
+        "beats_naive_by_pct": 42.5
+      },
+      "TBATS": {
+        "mase": 0.2269,
+        "smape": 1.4483,
+        "gate": "PASS",
+        "beats_naive_by_pct": 77.3
+      },
+      "Theta": {
+        "mase": 0.7953,
+        "smape": 5.1724,
+        "gate": "PASS",
+        "beats_naive_by_pct": 20.5
+      }
+    }
+  },
+  "test_stages": {
+    "stage_1_smoke": {
+      "result": "PASS",
+      "description": "19/19 models execute end-to-end without error"
+    },
+    "stage_2_mase": {
+      "result": "PASS",
+      "description": "16/16 certifiable models beat seasonal naïve baseline"
+    },
+    "stage_3_reproducibility": {
+      "result": "PASS",
+      "description": "SHA-256 determinism verified across runs"
+    },
+    "stage_4_backtest": {
+      "result": "PASS",
+      "description": "Walk-forward backtest verification"
+    },
+    "stage_5_diversity": {
+      "result": "PASS",
+      "description": "Multi-dataset type validation"
+    },
+    "stage_6_tier_config": {
+      "result": "PASS",
+      "description": "Configuration tier validation"
+    }
+  },
+  "fixes_applied": [
+    {
+      "model": "BSTS",
+      "issue": "statsmodels UnobservedComponents: level='local level' with trend=True — the model string silently overrides the trend parameter, resulting in no trend component on a trending dataset.",
+      "fix": "Changed to level='local linear trend'. Removed redundant trend=True parameter.",
+      "mase_before": 1.0113,
+      "mase_after": 0.8423
+    },
+    {
+      "model": "Theta",
+      "issue": "SES alpha hardcoded to 0.2 (optimized=False). Fixed alpha is suboptimal for datasets with varying smoothing requirements.",
+      "fix": "Changed to optimized=True. statsmodels MLE now selects optimal alpha per dataset.",
+      "mase_before": 0.807,
+      "mase_after": 0.7953
+    }
+  ],
+  "reproducibility": {
+    "dataset_seed": 42,
+    "dataset_file": "data/input.csv",
+    "test_runner": "python tests/run_tests.py",
+    "individual_stage": "python tests/run_tests.py --stage 2",
+    "environment": "requirements.txt"
+  },
+  "last_run": {
+    "timestamp": "2026-03-11T16:45:14.091404+00:00",
+    "all_stages_pass": true,
+    "stages_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "stage_results": {
+      "stage_1_smoke_test": {
+        "result": "PASS",
+        "description": "Smoke Test"
+      },
+      "stage_2_mase_and_smape": {
+        "result": "PASS",
+        "description": "MASE & sMAPE"
+      },
+      "stage_3_reproducibility": {
+        "result": "PASS",
+        "description": "Reproducibility"
+      },
+      "stage_4_backtest": {
+        "result": "PASS",
+        "description": "Backtest"
+      },
+      "stage_5_dataset_diversity": {
+        "result": "PASS",
+        "description": "Dataset Diversity"
+      },
+      "stage_6_tier_config": {
+        "result": "PASS",
+        "description": "Tier Config"
+      }
+    },
+    "note": "Written automatically by tests/run_tests.py",
+    "model_scores_updated": true
+  },
+  "certified": true,
+  "last_full_run": "2026-03-11T16:45:14.091404+00:00",
+  "locked_engine_files": {
+    "description": "SHA-256 hashes of all certified engine files. Any modification invalidates certification.",
+    "governance": "See sentinel_engine/LOCKED.md for full governance rules.",
+    "verification_command": "python tests/run_tests.py --stage 3",
+    "files": {
+      "sentinel_engine/__init__.py": "23f5edea70d14b906963c406abec6bb5cf0974aace4a80f3941c308b2e8e3437",
+      "sentinel_engine/backtest.py": "46bf464780c11dd8cb027188f3150832344bca356d95a57c266acb75a01db101",
+      "sentinel_engine/certifier.py": "2caeae757ad9cadcd8b4bd779d0f4215fc435ff863d42f605a36d2d3d28553b0",
+      "sentinel_engine/contracts.py": "8a272f443baeae52628403c28490d30258c1db8b2f9dfc030952b5eccb73041f",
+      "sentinel_engine/ensemble.py": "e17083ed71988caca5a10d42e2eee6e77cdbaae23723333a3e237c7ac3b5e086",
+      "sentinel_engine/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sentinel_engine/models/arima.py": "2f34ab875e7b7fccded9c5c520e09b30a15adadc4c75f7dc557742d6a1196af0",
+      "sentinel_engine/models/bsts.py": "05520df765b2577392d16d0fde6e7a44946176858f6500201f592a1dbee58f68",
+      "sentinel_engine/models/contracts.py": "885281d7347c42ce90b52cee363fef82cc481ed0067aed2fe37342e4b200a8d8",
+      "sentinel_engine/models/croston.py": "4da362c247a3c0935e367c7ec1db7879fb8f1af29e9928953799caf354e7f670",
+      "sentinel_engine/models/dhr.py": "0eaa928eb578b3360d03c8de3b6b7c1c5fe884567b4a34bf978a983e00b25a90",
+      "sentinel_engine/models/ets.py": "765fd1a40a6b29f5e619975cf97e02dea7e00d3fe2c84c31fa9f93da368a0019",
+      "sentinel_engine/models/garch_model.py": "a6b460c709d6db9f466c8291e29b621987e73bb45fe9e2c4abd053215b55f862",
+      "sentinel_engine/models/hw_damped.py": "acad57bd6cfd61981479c590c3a983ac147794f2e1601fcd204d6587ee581488",
+      "sentinel_engine/models/lightgbm_model.py": "4f9efb99057a4e17c58c20b1b80243960d87e2d2553d754dede4648d3626d7ed",
+      "sentinel_engine/models/naive.py": "9586790e52b2c23a53298e513d63f62ce822a593e42f7167d58fb937a22ece34",
+      "sentinel_engine/models/nnetar.py": "458c1a3a767741fc3e7da102e5511603ab8bbdd86f2e08b2d4e3b109f5621bee",
+      "sentinel_engine/models/prophet.py": "b8f28604d7bfe12de43d5f0e930f8874da8eb90ec8a99f4bfa40e24428f7e297",
+      "sentinel_engine/models/sarima.py": "97be1796147dff5cfdfb42dc5bc671ea3dc64ce324d68904156d0931d177c7e4",
+      "sentinel_engine/models/sarimax.py": "839d43b497ebab20d7e78c50b8e88bffa2c785cfef0fa0211f22fe764e45ad13",
+      "sentinel_engine/models/stl_ets.py": "1bbd07cbe24fdf7a97c95a0a0f31a220730de12e190b1842a6d693bdd04a9669",
+      "sentinel_engine/models/tbats.py": "c27b99e4995e6f542beb1e58d2180a37265b529910c15e2e4d09169be9a642f7",
+      "sentinel_engine/models/theta.py": "2fada821e1b2cf96e907e62f34da54458d089372142d8e5a26320febbf804a6b",
+      "sentinel_engine/models/var_model.py": "cf1023f7baeaec97946100b23415dc6aa39a99c4be0f81453ee348638a1dee2d",
+      "sentinel_engine/models/x13.py": "351ee14cb380c60736d964dd03a3a0bd9128c52f00ea91b918c6d299766dc8ce",
+      "sentinel_engine/registry.py": "1ac8c91010d951c13753d4e68c4ccc59ddbb2aceb1803218d1653052257ad39d",
+      "sentinel_engine/runner.py": "820034437322b168f4f782bd9e7db59790dab30e714166664581814c0e03b2a4",
+      "sentinel_engine/sentinel_config.py": "85966673d896bb7c2ace014b74a0ef3e7075ab66f82d9c8f029129b7d1a5a4d9",
+      "sentinel_engine/stacker.py": "22dd1d61d2c283affe951bee915a783130138304c466e42c747875da14318ef7"
+    }
+  }
+}

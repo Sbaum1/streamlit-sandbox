@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "series_total": 1428,
+    "series_valid": 1428,
+    "series_crashed": 0,
+    "median_mase": 0.6913,
+    "mean_mase": 0.8592,
+    "p25_mase": 0.4567,
+    "p75_mase": 1.0716,
+    "median_smape": 0.0901,
+    "beats_naive_pct": 71.6,
+    "leaderboard": {
+      "VEDUTA v2.1.0": 0.6913,
+      "Modern ensemble": 0.7,
+      "ForecastPro": 0.828,
+      "Theta (M3 winner)": 0.854,
+      "ETS (auto)": 0.861,
+      "AutoARIMA": 0.893,
+      "Seasonal Na\u00efve": 1.0
+    },
+    "veduta_rank": "1 of 7",
+    "target_met": true,
+    "target_mase": 0.7
+  },
+  "results_sha256": "82877b22f2eacf6bcda17941b1814b14bc547d402c5f25e53e89f50e6a961f37",
+  "elapsed_s": 17501.6,
+  "engine": "VEDUTA v2.1.0"
+}

@@ -1,0 +1,77 @@
+{
+  "dataset": "seasonal_dataset",
+  "models": [
+    {
+      "empty_output": false,
+      "model_name": "ARIMA",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "SARIMA",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "SARIMAX",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "Theta",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "STL+ETS",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "TBATS",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "Prophet",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "BSTS",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    },
+    {
+      "empty_output": true,
+      "model_name": "X-13",
+      "non_finite": false,
+      "notes": "Empty forecast output",
+      "status": "success"
+    },
+    {
+      "empty_output": false,
+      "model_name": "Primary Ensemble",
+      "non_finite": false,
+      "notes": "",
+      "status": "success"
+    }
+  ],
+  "run_signature": null,
+  "test": "shock"
+}
