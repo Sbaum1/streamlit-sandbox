@@ -250,6 +250,8 @@ def run_pilot(verbose: bool = True) -> Dict[str, Any]:
     tmp = OUTPUT_DIR / "_pilot_tmp.json"
     with open(tmp, "w") as f:
         json.dump(output, f, indent=2, default=str)
+    if OUTPUT_FILE.exists():
+        OUTPUT_FILE.unlink()
     tmp.rename(OUTPUT_FILE)
     if verbose:
         print(f"Results written to: {OUTPUT_FILE}")

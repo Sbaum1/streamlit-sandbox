@@ -5,7 +5,7 @@
       "description": "Flat / near-zero variance",
       "status": "PASS",
       "mase": 0.3319,
-      "duration_s": 60.13,
+      "duration_s": 181.98,
       "error": null,
       "metrics": {
         "mae": 3.3193,
@@ -37,7 +37,7 @@
       "description": "Structural break at month 48",
       "status": "FAIL",
       "mase": 3.9858,
-      "duration_s": 26.47,
+      "duration_s": 79.49,
       "error": null,
       "metrics": {
         "mae": 159.714,
@@ -69,7 +69,7 @@
       "description": "Short series (48 obs)",
       "status": "PASS",
       "mase": 0.2941,
-      "duration_s": 7.49,
+      "duration_s": 25.66,
       "error": null,
       "metrics": {
         "mae": 15.2256,
@@ -101,7 +101,7 @@
       "description": "High volatility / noisy",
       "status": "PASS",
       "mase": 1.0611,
-      "duration_s": 13.37,
+      "duration_s": 46.57,
       "error": null,
       "metrics": {
         "mae": 329.5934,
@@ -133,7 +133,7 @@
       "description": "Intermittent demand (40% zeros)",
       "status": "PASS",
       "mase": 0.8106,
-      "duration_s": 0.01,
+      "duration_s": 0.08,
       "error": null,
       "metrics": {
         "mae": 97.1953,
@@ -165,7 +165,7 @@
       "description": "Trend reversal at month 48",
       "status": "PASS",
       "mase": 0.7397,
-      "duration_s": 41.12,
+      "duration_s": 128.66,
       "error": null,
       "metrics": {
         "mae": 121.8364,

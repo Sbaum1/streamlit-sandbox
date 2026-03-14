@@ -14,6 +14,7 @@ from sidebar.command_center import render_command_center
 from tabs.home import render_home
 from tabs.executive_insight_trust import render_executive_insight_trust
 from tabs.report_builder import render_report_builder
+from tabs.peer_benchmarking import render_peer_benchmarking
 from tabs.help import render_help
 
 # --------------------------------------------------
@@ -141,6 +142,7 @@ tabs = st.tabs([
     "The Veduta",
     "Intelligence & Trust",
     "Report Builder",
+    "Peer Benchmarking",
     "Help & Reference",
 ])
 
@@ -151,4 +153,6 @@ with tabs[1]:
 with tabs[2]:
     render_report_builder()
 with tabs[3]:
+    render_peer_benchmarking()    
+with tabs[4]:
     render_help()

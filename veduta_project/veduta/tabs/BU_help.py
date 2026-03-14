@@ -164,7 +164,7 @@ def render_help():
 
     # ── Search ────────────────────────────────────────────────────────────────
     search = st.text_input(
-        "Search help topics",
+        "",
         placeholder="Search help topics… (e.g. MASE, scenario, FRED, CI)",
         label_visibility="collapsed",
     )

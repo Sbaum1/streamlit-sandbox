@@ -26,11 +26,11 @@
     }
   },
   "results": {
-    "gate_summary": "16/16 certifiable models beat seasonal naive baseline (MASE < 1.00)",
-    "median_mase": 0.5495,
+    "gate_summary": "11/11 certifiable models beat seasonal naive baseline (MASE < 1.00)",
+    "median_mase": 0.5239,
     "mase_scale": 99548.1875,
     "naive_rmse": 108439.2226,
-    "best_mase": 0.2199,
+    "best_mase": 0.2048,
     "best_model": "Primary Ensemble",
     "models": {
       "ARIMA": {
@@ -39,35 +39,17 @@
         "gate": "PASS",
         "beats_naive_by_pct": 30.2
       },
-      "BSTS": {
-        "mase": 0.8423,
-        "smape": 5.4188,
-        "gate": "PASS",
-        "beats_naive_by_pct": 15.8
-      },
       "DHR": {
         "mase": 0.5239,
         "smape": 3.413,
         "gate": "PASS",
         "beats_naive_by_pct": 47.6
       },
-      "ETS": {
-        "mase": 0.6606,
-        "smape": 4.273,
-        "gate": "PASS",
-        "beats_naive_by_pct": 33.9
-      },
       "GARCH": {
         "mase": 0.9111,
         "smape": 5.9527,
         "gate": "PASS",
         "beats_naive_by_pct": 8.9
-      },
-      "HW_Damped": {
-        "mase": 0.2527,
-        "smape": 1.6117,
-        "gate": "PASS",
-        "beats_naive_by_pct": 74.7
       },
       "LightGBM": {
         "mase": 0.6676,
@@ -88,22 +70,16 @@
         "beats_naive_by_pct": 29.0
       },
       "Primary Ensemble": {
-        "mase": 0.2199,
-        "smape": 1.3989,
+        "mase": 0.2048,
+        "smape": 1.2999,
         "gate": "PASS",
-        "beats_naive_by_pct": 78.0
+        "beats_naive_by_pct": 79.5
       },
       "Prophet": {
-        "mase": 0.41,
-        "smape": 2.5872,
+        "mase": 0.4961,
+        "smape": 3.1197,
         "gate": "FLAGGED",
-        "beats_naive_by_pct": 59.0
-      },
-      "SARIMA": {
-        "mase": 0.2871,
-        "smape": 1.8317,
-        "gate": "PASS",
-        "beats_naive_by_pct": 71.3
+        "beats_naive_by_pct": 50.4
       },
       "SARIMAX": {
         "mase": 0.2871,
@@ -118,22 +94,16 @@
         "beats_naive_by_pct": 72.8
       },
       "Stacked Ensemble": {
-        "mase": 0.5752,
-        "smape": 3.7043,
+        "mase": 0.6899,
+        "smape": 4.4652,
         "gate": "PASS",
-        "beats_naive_by_pct": 42.5
+        "beats_naive_by_pct": 31.0
       },
       "TBATS": {
         "mase": 0.2269,
         "smape": 1.4483,
         "gate": "PASS",
         "beats_naive_by_pct": 77.3
-      },
-      "Theta": {
-        "mase": 0.7953,
-        "smape": 5.1724,
-        "gate": "PASS",
-        "beats_naive_by_pct": 20.5
       }
     }
   },
@@ -187,47 +157,21 @@
     "environment": "requirements.txt"
   },
   "last_run": {
-    "timestamp": "2026-03-11T16:45:14.091404+00:00",
-    "all_stages_pass": true,
+    "timestamp": "2026-03-14T14:29:46.307694+00:00",
+    "all_stages_pass": false,
     "stages_run": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6
+      1
     ],
     "stage_results": {
       "stage_1_smoke_test": {
-        "result": "PASS",
+        "result": "FAIL",
         "description": "Smoke Test"
-      },
-      "stage_2_mase_and_smape": {
-        "result": "PASS",
-        "description": "MASE & sMAPE"
-      },
-      "stage_3_reproducibility": {
-        "result": "PASS",
-        "description": "Reproducibility"
-      },
-      "stage_4_backtest": {
-        "result": "PASS",
-        "description": "Backtest"
-      },
-      "stage_5_dataset_diversity": {
-        "result": "PASS",
-        "description": "Dataset Diversity"
-      },
-      "stage_6_tier_config": {
-        "result": "PASS",
-        "description": "Tier Config"
       }
     },
-    "note": "Written automatically by tests/run_tests.py",
-    "model_scores_updated": true
+    "note": "Written automatically by tests/run_tests.py"
   },
-  "certified": true,
-  "last_full_run": "2026-03-11T16:45:14.091404+00:00",
+  "certified": false,
+  "last_full_run": "2026-03-14T14:24:46.064726+00:00",
   "locked_engine_files": {
     "description": "SHA-256 hashes of all certified engine files. Any modification invalidates certification.",
     "governance": "See sentinel_engine/LOCKED.md for full governance rules.",

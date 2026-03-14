@@ -202,7 +202,7 @@ def render_command_center():
                 _tiers,
                 index=_tiers.index(_cur) if _cur in _tiers else 0,
                 format_func=lambda x: {
-                    "enterprise": "Enterprise  (19 models)",
+                    "enterprise": "Enterprise  (20 models)",
                     "pro":        "Pro  (13 models)",
                     "essentials": "Essentials  (10 models)",
                 }[x],

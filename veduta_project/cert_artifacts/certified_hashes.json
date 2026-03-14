@@ -1,121 +1,91 @@
 {
   "engine_version": "2.0.0",
-  "generated_at": "2026-03-11T16:43:39.827428+00:00",
-  "cert_id": "ab4bfa7c-252b-46fa-8ced-a6153d385495",
+  "generated_at": "2026-03-14T14:22:24.080081+00:00",
+  "cert_id": "2d4babc2-d37a-4230-9f46-24359699b36d",
   "models": {
-    "BSTS": {
-      "sha256": "08986a3b05f83625eac3b43330aa117bd8787daaeaccb25ef216d181f73f2543",
-      "rows": 12,
-      "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
-    },
-    "ETS": {
-      "sha256": "1db7e5626395c389024fbcbdf0745fb185b47dc74e403b237a967017d803f0e4",
-      "rows": 12,
-      "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
-    },
     "Prophet": {
-      "sha256": "cda06cd9066156093cdd69b403719a2a56b231bc957bc434e1b673eb60cf72c5",
+      "sha256": "296d582f94c7dbe6c30de26c5320e6e7d768efca7d844e9047bd4ea73f1ce38e",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
-    },
-    "SARIMA": {
-      "sha256": "551a03a8120b2de561720487dd231cfaac65f43f1a57a05fa4c532ae15ee78a3",
-      "rows": 12,
-      "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
+      "generated_at": "2026-03-14T14:22:24.075086+00:00"
     },
     "STL+ETS": {
       "sha256": "22f58f8512e531ab9db02e479e4c2bb2c3ee4da37a6ca976502a279d900c0afa",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
+      "generated_at": "2026-03-14T14:22:24.076118+00:00"
     },
     "TBATS": {
       "sha256": "42908076f84466ce07a960b75a8adda5ddf4c7cb00c81e6b4db2da445309bebb",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.807621+00:00"
-    },
-    "Theta": {
-      "sha256": "aa5ffa50378b6a2ca7f8d4ee8fbc92bff96d69ef4b929ec8001e79cab12494db",
-      "rows": 12,
-      "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.823432+00:00"
+      "generated_at": "2026-03-14T14:22:24.076118+00:00"
     },
     "ARIMA": {
       "sha256": "5ab12dddeb8a98aacf1c6040ae69157573868813c7ab611d791cad594b25f973",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.823432+00:00"
+      "generated_at": "2026-03-14T14:22:24.076713+00:00"
     },
     "SARIMAX": {
       "sha256": "551a03a8120b2de561720487dd231cfaac65f43f1a57a05fa4c532ae15ee78a3",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.823432+00:00"
+      "generated_at": "2026-03-14T14:22:24.077051+00:00"
     },
     "Naive": {
       "sha256": "d79681873916e7dbf8350b70b3c5d7e5839e610516849a8be5286dd9f524769e",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.823432+00:00"
+      "generated_at": "2026-03-14T14:22:24.077051+00:00"
     },
     "X-13": {
       "sha256": "c377d3a40d5316ac608e23cf8fbce1e340fd33d30e71b8913c4078d075475839",
       "rows": 72,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.823432+00:00"
-    },
-    "HW_Damped": {
-      "sha256": "3f40ce696391a30c74f2c9fbc229f592bfbb50808804c1760f64fa274ab68067",
-      "rows": 12,
-      "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.077051+00:00"
     },
     "Croston_SBA": {
       "sha256": "210d717266a67faa60a1b6de74e91a7f0c941262ca00c0c99e4718b5b8fbd5c9",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.078107+00:00"
     },
     "DHR": {
       "sha256": "bd45d26f9271428d9e27ae7b733dad75c1ea4b98f523b4036513b2e8ee537bea",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.078107+00:00"
     },
     "LightGBM": {
       "sha256": "d19c7d0cd1e7b3eb52241a9068e128f340bf000fabb2d29fccdef4319c7423eb",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.078107+00:00"
     },
     "NNETAR": {
       "sha256": "51ceb8aa11fe61998c074f602fc10bec2e4359e1316f524641a173ea98df6718",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.079098+00:00"
     },
     "GARCH": {
       "sha256": "ca36ed3feeb8595d871f51a391444ff757e36a94aeeb83e3e0e9e62ae01135a6",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.079098+00:00"
     },
     "Primary Ensemble": {
-      "sha256": "f5074758abcdd0713d0e8150fe581ccf356c7492faa61e2ecb5850a3989041c4",
+      "sha256": "5888ccd3376e2db9db79734e6293dfd5863e5e2bb43d9c13187b63a3c5ef8e3b",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.825421+00:00"
+      "generated_at": "2026-03-14T14:22:24.079098+00:00"
     },
     "Stacked Ensemble": {
-      "sha256": "b10685a6a67276f13e21a557ec8b3cfb1589371fcc7fa5e208157abcce7fe73e",
+      "sha256": "599a82a2c58d7f0b95a89678d665c5bc252c014a86437634aa8fedcc52c806f2",
       "rows": 12,
       "engine_version": "2.0.0",
-      "generated_at": "2026-03-11T16:43:39.827428+00:00"
+      "generated_at": "2026-03-14T14:22:24.080081+00:00"
     }
   }
 }
