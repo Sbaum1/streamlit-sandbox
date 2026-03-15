@@ -1,13 +1,12 @@
 # ==================================================
 # FILE: sentinel_engine/ensemble.py
-# VERSION: 4.0.1
+# VERSION: 4.0.0
 # ROLE: PRIMARY ENSEMBLE — STACKED GENERALISATION
-# ENGINE: Sentinel Engine v2.2.0
+# ENGINE: Sentinel Engine v2.1.0
 # UPDATED: G3 — Median-fallback weight bridge support
 # UPDATED: G9 — Tier-filtered ensemble dispatch
 # UPDATED: H1 — Regime weight adjustment + fitness prior
 # UPDATED: M2 — Ridge regression stacking meta-learner
-# UPDATED: Phase 4 — MSTL added to MODEL_FAMILY (ets family)
 # ==================================================
 #
 # M2 UPGRADE — RIDGE REGRESSION STACKING LAYER:
@@ -70,8 +69,6 @@ STACKER_MIN_FOLDS        = 3    # minimum folds needed to attempt ridge stacking
 STACKER_ALPHAS           = [0.001, 0.01, 0.1, 1.0, 10.0]  # ridge CV grid
 
 MODEL_FAMILY: Dict[str, str] = {
-    "SES":       "ets",
-    "MSTL":      "ets",   # multi-seasonal decomposition — exponential smoothing family
     "SARIMA":    "arima",
     "STL+ETS":   "arima",
     "HW_Damped": "arima",

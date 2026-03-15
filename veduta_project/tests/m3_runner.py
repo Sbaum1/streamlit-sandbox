@@ -2,7 +2,7 @@
 # FILE: veduta_project/tests/m3_runner.py
 # VERSION: 1.0.0
 # ROLE: FULL M3 BENCHMARK RUN — 1,428 MONTHLY SERIES
-# ENGINE: Sentinel Engine v2.1.0
+# ENGINE: Sentinel Engine v2.2.0
 # ==================================================
 #
 # PURPOSE:
@@ -157,7 +157,7 @@ def run_full(
     pending = [s for s in all_series if s["id"] not in completed_ids]
 
     if verbose:
-        print(f"\nM3 Full Run — VEDUTA Engine v2.1.0")
+        print(f"\nM3 Full Run — VEDUTA Engine v2.2.0")
         print(f"  Total series     : {len(all_series)}")
         print(f"  Already done     : {len(completed_ids)}")
         print(f"  To run           : {len(pending)}")
@@ -262,7 +262,7 @@ def run_full(
         "summary":        summary,
         "results_sha256": results_hash,
         "elapsed_s":      elapsed_total,
-        "engine":         "VEDUTA v2.1.0",
+        "engine":         "VEDUTA v2.2.0",
     }
 
     # Atomic write — unlink first for Windows compatibility

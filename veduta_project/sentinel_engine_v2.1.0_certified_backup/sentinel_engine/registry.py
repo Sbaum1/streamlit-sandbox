@@ -1,9 +1,9 @@
 # ==================================================
 # FILE: sentinel_engine/registry.py
-# VERSION: 3.2.0
+# VERSION: 3.0.0
 # ROLE: AUTHORITATIVE MODEL REGISTRY
-# ENGINE: Sentinel Engine v2.2.0
-# UPDATED: PHASE 4 (SES added; ARIMA/SARIMAX upgraded; MSTL added; SES removed from ensemble) — 7 NEW MODELS ADDED
+# ENGINE: Sentinel Engine v2.0.0
+# UPDATED: PHASE 3C — 7 NEW MODELS ADDED
 # ==================================================
 #
 # GOVERNANCE:
@@ -63,8 +63,6 @@ from .models.x13         import run_x13
 # PRODUCTION MODEL RUNNERS — PHASE 3C (NEW)
 # --------------------------------------------------
 
-from .models.ses             import run_ses
-from .models.mstl            import run_mstl
 from .models.hw_damped       import run_hw_damped
 from .models.croston         import run_croston
 from .models.dhr             import run_dhr
@@ -223,33 +221,6 @@ def get_model_registry() -> List[Dict[str, Any]]:
             "ensemble_member":  False,
             "min_tier":         "enterprise",
             "routing_note":     None,
-        },
-
-        # --------------------------------------------------
-        # PHASE 4 — TIER: ESSENTIALS
-        # SES: 20th model, diagnostic value (level-series indicator)
-        # MSTL: 21st model, 20th ensemble member (multi-seasonal)
-        # --------------------------------------------------
-        {
-            "name":             "SES",
-            "runner":           run_ses,
-            "diagnostic_only":  False,
-            "ensemble_member":  False,
-            "min_tier":         "essentials",
-            "routing_note":     "Simple Exponential Smoothing. AIC-optimal alpha selection. "
-                                "Diagnostic: if SES is best model, series is a pure level "
-                                "process with no forecastable trend or seasonal structure.",
-        },
-        {
-            "name":             "MSTL",
-            "runner":           run_mstl,
-            "diagnostic_only":  False,
-            "ensemble_member":  True,
-            "min_tier":         "essentials",
-            "routing_note":     "Multi-Seasonal Trend Decomposition with Loess. "
-                                "Dual-pass STL (annual + quarterly) on monthly series. "
-                                "Best on series with complex multi-cycle seasonal structure "
-                                "(retail, CPG, manufacturing, financial).",
         },
 
         # --------------------------------------------------
